@@ -4,6 +4,9 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
+        Cell cell = new Cell();
+        UserInteraction userInteraction = new UserInteraction();
+        View view = new View();
         // Crée un scanner pour lire les entrées de l'utilisateur
         Scanner input = new Scanner(System.in);
         // Demande à l'utilisateur de choisir le type de joueur pour Player 1
@@ -30,8 +33,7 @@ public class Main {
         } else {
             player2 = new ArtificialPlayer("| O ");
         }
-        TicTacToe ticTacToe = new TicTacToe(player1, player2);
-        ticTacToe.display();
+        TicTacToe ticTacToe = new TicTacToe(player1, player2, view, userInteraction);
         ticTacToe.play();
 
     }

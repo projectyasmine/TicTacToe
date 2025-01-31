@@ -4,32 +4,24 @@ public class TicTacToe {
     public Player player1;
     public Player player2;
     private Player actualPlayer;
+    private final UserInteraction userInteraction;
+    private final View view;
 
-    public TicTacToe(Player player1, Player player2) {
+    public TicTacToe(Player player1, Player player2, View view, UserInteraction userInteraction) {
         this.player1 = player1;
         this.player2 = player2;
+        this.view = view;
         board = new Cell[boardSize][boardSize];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 board[i][j] = new Cell();
             }
         }
+        this.userInteraction = new UserInteraction();
 //        playerX = new Player("| X ");
 //        playerO = new Player("| O ");
 
     }
-
-    public void display() {
-        for (int i = 0; i < boardSize; i++) {
-            System.out.println("-".repeat(13));
-            for (int j = 0; j < boardSize; j++) {
-                System.out.print(board[i][j].getRepresentation());
-            }
-            System.out.println("|");
-        }
-        System.out.println("-".repeat(13));
-    }
-
 
     public void setOwner(int row, int col, Player player) {
         board[row][col].setOwner(player);
@@ -38,31 +30,44 @@ public class TicTacToe {
     public void play() {
         // Joueur actuel initialisé à playerX
          actualPlayer = player1;
-        while (!isOver()) {
-            // Affiche le plateau de jeu
-            display();
-            // Affiche le tour du joueur actuel
-            System.out.println("Tour de " + actualPlayer.getRepresentation().replace("|",""));
-            // Obtient le mouvement du joueur actuel
-            int[] move = actualPlayer.getMoveFromPlayer(board, boardSize);
-            // Définit le propriétaire de la case choisie par le joueur actuel
-            setOwner(move[0], move[1], actualPlayer);
-            if (isOver()) {
-                break;
-            };
-            // Vérifie que le joueur actuel est égale à playerX
-            if (actualPlayer == player1) {
-                // Si le joueur actuel est playerX, le joueur suivant sera playerO
-                actualPlayer = player2;
-            } else {
-                // Sinon, le joueur suivant sera playerX
-                actualPlayer = player1;
-            }
-        }
-        // Affiche le plateau de jeu final
-        display();
-        System.out.println("Jeu terminé!");
-    }
+         boolean keepPlaying = true;
+         while (keepPlaying) {
+             while (!isOver()) {
+                 // Affiche le plateau de jeu
+                 view.display(board);
+                 // Affiche le tour du joueur actuel
+                 System.out.println("Tour de " + actualPlayer.getRepresentation().replace("|", ""));
+                 // Obtient le mouvement du joueur actuel
+                 int[] move = actualPlayer.getMoveFromPlayer(board,boardSize);
+                 // Définit le propriétaire de la case choisie par le joueur actuel
+                 setOwner(move[0], move[1], actualPlayer);
+                 if (isOver()) {
+                     break;
+                 }
+                 // Vérifie que le joueur actuel est égale à playerX
+                 if (actualPlayer == player1) {
+                     // Si le joueur actuel est playerX, le joueur suivant sera playerO
+                     actualPlayer = player2;
+                 } else {
+                     // Sinon, le joueur suivant sera playerX
+                     actualPlayer = player1;
+                 }
+             }
+             // Affiche le plateau de jeu final
+             view.display(board);
+             System.out.println("Jeu terminé!");
+
+             keepPlaying = !userInteraction.exitGame();
+             if (keepPlaying) {
+                 for (int i = 0; i < board.length; i++) {
+                     for (int j = 0; j < board[0].length; j++) {
+                         board[i][j] = new Cell();
+                     }
+                 }
+                 actualPlayer = player1;
+             }
+         }
+    };
 
     public boolean isOver() {
         boolean isOver = false;
