@@ -17,7 +17,7 @@ public class Main {
         // Si l'utilisateur entre 2, Player 1 sera un joueur artificiel
         Player player1;
         if (choice1 == 1) {
-            player1 = new HumanPlayer("| X ");
+            player1 = new HumanPlayer("| X ", userInteraction);
         } else {
             player1 = new ArtificialPlayer("| X ");
         }
@@ -29,7 +29,7 @@ public class Main {
         // Si l'utilisateur entre 2, Player 2 sera un joueur artificiel
         Player player2;
         if (choice2 == 1) {
-            player2 = new HumanPlayer("| O ");
+            player2 = new HumanPlayer("| O ", userInteraction);
         } else {
             player2 = new ArtificialPlayer("| O ");
         }
