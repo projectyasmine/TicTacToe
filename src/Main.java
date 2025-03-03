@@ -4,7 +4,6 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Cell cell = new Cell();
         UserInteraction userInteraction = new UserInteraction();
         View view = new View();
         // Crée un scanner pour lire les entrées de l'utilisateur
@@ -33,7 +32,7 @@ public class Main {
         } else {
             player2 = new ArtificialPlayer("| O ");
         }
-        TicTacToe ticTacToe = new TicTacToe(player1, player2, view, userInteraction);
+        TicTacToe ticTacToe = new TicTacToe(player1, player2, view);
         ticTacToe.play();
 
     }

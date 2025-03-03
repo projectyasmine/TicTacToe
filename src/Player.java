@@ -1,4 +1,5 @@
 public abstract class Player {
+    // Mettre en privé avec getters setters
     public String representation;
 
     public Player(String representation) {

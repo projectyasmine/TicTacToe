@@ -23,6 +23,8 @@ public class UserInteraction {
         return new int[]{row, col};
     }
 
+
+
     // Méthode pour permettre à l'utilisateur de quitter le jeu.
 
     public boolean exitGame() {

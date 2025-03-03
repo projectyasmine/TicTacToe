@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class HumanPlayer extends Player {
     private final UserInteraction userInteraction;
 
@@ -32,8 +30,6 @@ public class HumanPlayer extends Player {
 //        }
 //        return new int[]{row, col};
 //    }
-
-
 
 
 }
